@@ -1,5 +1,4 @@
 var LivingCreature = require("./class.livingcreature");
-
 module.exports = class GrassEater extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index);
@@ -19,10 +18,12 @@ module.exports = class GrassEater extends LivingCreature {
             [this.x + 1, this.y + 1]
         ];
     }
+
     chooseCell(num, direct, matrix) {
         this.getNewCoordinates();
         return super.chooseCell(num, direct, matrix);
     }
+
     moveWinter(matrix) {
         var newCell = random(this.chooseCell(4, this.directions, matrix));
         if (this.acted == false) {
@@ -37,11 +38,9 @@ module.exports = class GrassEater extends LivingCreature {
                 this.energy--;
             }
         }
-        else {
-            this.acted = false;
-        }
-
+        else this.acted = false;
     }
+
     move(matrix) {
         var newCell = random(this.chooseCell(0, this.directions, matrix));
         if (this.acted == false) {
@@ -60,61 +59,43 @@ module.exports = class GrassEater extends LivingCreature {
             }
         }
         else this.acted = false;
-
     }
-    eat(matrix) {
 
+    eat(matrix) {
         var newCell = random(this.chooseCell(1, this.directions, matrix));
         if (this.acted == false) {
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
-                
                 matrix[newY][newX].die(matrix);
-
                 matrix[newY][newX] = matrix[this.y][this.x];
                 matrix[this.y][this.x] = 0;
                 this.x = newX;
                 this.y = newY;
                 this.energy++;
                 this.acted = true;
-
                 if (this.energy >= 8) {
                     this.mul(matrix);
-
                 }
             }
-            else {
-                this.move(matrix);
-            }
+            else this.move(matrix);
         }
         else this.acted = false;
-
     }
 
     eatWinter(matrix) {
-
         var newCell = random(this.chooseCell(5, this.directions, matrix));
         if (this.acted == false) {
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
-                
                 matrix[newY][newX].die(matrix);
-
                 matrix[newY][newX] = 4;
-                // matrix[this.y][this.x] = 0;
-                // this.x = newX;
-                // this.y = newY;
-                
                 this.acted = true;
             }
-            else {
-                this.move(matrix);
-            }
+            else this.move(matrix);
         }
         else this.acted = false;
-
     }
 
     mul(matrix) {
@@ -133,16 +114,13 @@ module.exports = class GrassEater extends LivingCreature {
         matrix[this.y][this.x] = 0;
     }
 
-    dieCounter(){
+    dieCounter() {
         GrassEater.dead++;
         GrassEater.current--;
     }
 }
 
-
-function random(arr)
-{
+function random(arr) {
     var randomIndex = Math.floor(Math.random() * arr.length);
     return arr[randomIndex];
 }
-

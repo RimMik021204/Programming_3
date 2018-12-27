@@ -6,7 +6,6 @@ module.exports = class Fish extends LivingCreature {
         this.directions = [];
         this.acted = false;
     }
-
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -45,9 +44,7 @@ module.exports = class Fish extends LivingCreature {
             if (newCell1) {
                 var newX = newCell1[0];
                 var newY = newCell1[1];
-
                 matrix[newY][newX].die(matrix);
-
                 matrix[newY][newX] = 0;
                 this.energy++;
                 this.acted = true;
@@ -59,9 +56,7 @@ module.exports = class Fish extends LivingCreature {
             else if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
-
                 matrix[newY][newX].die(matrix);
-
                 matrix[newY][newX] = 0;
                 this.energy++;
                 this.acted = true;
@@ -70,16 +65,12 @@ module.exports = class Fish extends LivingCreature {
                     this.energy = 5;
                 }
             }
-            else {
-                this.move(matrix);
-            }
-
+            else this.move(matrix);
         }
         else this.acted = false;
 
 
     }
-
 
     move(matrix) {
         var newCell = random(this.chooseCell(4, this.directions, matrix));
@@ -99,19 +90,17 @@ module.exports = class Fish extends LivingCreature {
             }
         }
         else this.acted = false;
-
     }
 
     die(matrix) {
         this.dieCounter();
         matrix[this.y][this.x] = 4;
     }
-    
-    dieCounter(){
+
+    dieCounter() {
         Fish.dead++;
         Fish.current--;
     }
-
 }
 
 function random(arr) {

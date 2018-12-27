@@ -5,16 +5,10 @@ var takt = 0;
 var side = 15;
 var arr = [];
 var dzukQanak = 25;
-var img;
 
-// function preload() {
-// 	img = loadImage('../img/grass.jpeg');
-//   }
 function setup() {
-	
 	background('#acacac');
 	frameRate(0);
-
 	socket = io();
 
 	socket.on("send matrix", function (mtx) {
@@ -22,25 +16,19 @@ function setup() {
 		createCanvas(1500, 751);
 		background('#acacac');
 		redraw();
-
 		socket.on("redraw", function (mtx) {
 			matrix = mtx;
 			redraw();
 		});
-
 		socket.on("stats", function (stats) {
 			stat = stats;
 		});
-
 	});
-
 	noLoop();
-
 }
 
 function draw() {
 	background('#acacac');
-	// image(img, 0, 0, 300, 300);
 	for (var yCord = 100; yCord <= 600; yCord += 100) {
 		for (var xCord = 100; xCord <= 600; xCord += 100) {
 			line(1500, yCord, xCord, yCord)
@@ -48,22 +36,16 @@ function draw() {
 	}
 	var yText = 0;
 	for (var i in stat) {
-
 		var xText = 0;
-
 		if (i == "Grass") {
 			fill("green")
-		}
-		else if (i == "GrassEater") {
+		} else if (i == "GrassEater") {
 			fill("yellow")
-		}
-		else if (i == "Predator") {
+		} else if (i == "Predator") {
 			fill("red")
-		}
-		else if (i == "Fish") {
+		} else if (i == "Fish") {
 			fill("blue")
-		}
-		else {
+		} else {
 			fill("black")
 		}
 		textSize(25)
@@ -73,7 +55,6 @@ function draw() {
 			xText += 180;
 		}
 		yText += 100;
-
 	}
 
 	textSize(35);
@@ -89,14 +70,13 @@ function draw() {
 	text("Dead", 1150, 150);
 	text("Current", 1350, 150);
 
-
 	for (var y = 0; y < matrix.length; y++) {
 		for (var x = 0; x < matrix[y].length; x++) {
 			if (matrix[y][x] == 0) {
 				fill("#acacac");
 				rect(x * side, y * side, side, side);
 			}
-			//grass verj
+
 			else if (matrix[y][x].index == 1) {
 				if (takt <= 50) {
 					fill("green");
@@ -109,14 +89,13 @@ function draw() {
 						takt = 0;
 					}
 				}
-
 			}
-			//grassEater
+
 			else if (matrix[y][x].index == 2) {
 				fill("yellow");
 				rect(x * side, y * side, side, side);
 			}
-			//Predator
+
 			else if (matrix[y][x].index == 3) {
 				if (takt <= 50) {
 					fill("red");
@@ -130,7 +109,7 @@ function draw() {
 					}
 				}
 			}
-			//get
+
 			else if (matrix[y][x] == 4) {
 				if (takt <= 50) {
 					fill("#00b3b3");
@@ -144,7 +123,7 @@ function draw() {
 					}
 				}
 			}
-			//fish verj
+
 			else if (matrix[y][x].index == 5) {
 				if (takt <= 50) {
 					fill("blue");

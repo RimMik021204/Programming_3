@@ -11,7 +11,6 @@ GrassEater.born = 0;
 GrassEater.dead = 0;
 GrassEater.current = 0;
 
-
 Predator.born = 0;
 Predator.dead = 0;
 Predator.current = 0;
@@ -20,11 +19,9 @@ Fish.born = 0;
 Fish.dead = 0;
 Fish.current = 0;
 
-
 var matrix = [];
 var n = 50;
 var m = 50;
-
 var arr = [];
 var dzukQanak = 25;
 
@@ -75,5 +72,4 @@ for (var y = 0; y < matrix.length; y++) {
         }
     }
 }
-
 module.exports = matrix;

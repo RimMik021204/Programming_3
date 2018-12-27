@@ -1,9 +1,7 @@
 var LivingCreature = require("./class.livingcreature");
-
-module.exports = class Grass extends LivingCreature{
+module.exports = class Grass extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index);
-
         this.directionsWater = [
             [this.x - 1, this.y - 1],
             [this.x, this.y - 1],
@@ -30,16 +28,14 @@ module.exports = class Grass extends LivingCreature{
             [this.x + 1, this.y + 2],
             [this.x + 2, this.y + 2],
         ];
-        
     }
 
     mul(matrix) {
         this.multiply++
-        var newCell = random( this.chooseCell(0, this.directions, matrix) );
+        var newCell = random(this.chooseCell(0, this.directions, matrix));
         var newCellWater = random(this.chooseCell(0, this.directionsWater, matrix));
-
         var cell4 = this.chooseCell(4, this.directionsWater, matrix)
-        if (cell4.length > 0) { 
+        if (cell4.length > 0) {
             if (newCellWater) {
                 var newX = newCellWater[0];
                 var newY = newCellWater[1];
@@ -59,17 +55,15 @@ module.exports = class Grass extends LivingCreature{
                 Grass.current++;
             }
         }
-
     }
 
-    die(){
+    die() {
         Grass.dead++;
         Grass.current--;
     }
 }
 
-function random(arr)
-{
+function random(arr) {
     var randomIndex = Math.floor(Math.random() * arr.length);
     return arr[randomIndex];
 }
